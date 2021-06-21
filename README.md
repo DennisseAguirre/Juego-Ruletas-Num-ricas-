@@ -1,1 +1,1 @@
-# Juego-Ruletas-Num-ricas-
+# Juego-Ruletas Numéricas
