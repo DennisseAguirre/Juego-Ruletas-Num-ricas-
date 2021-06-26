@@ -7,7 +7,7 @@ package clases;
 
 /**
  *
- * @author 
+ * @author Juan Pisco
  */
 public interface List <E>{
     int size();
