@@ -18,9 +18,15 @@ public interface List <E>{
     boolean removeLast() throws NullPointerException;
     E getFirst();
     E getLast();
-    Node<E> getNode(int index);
+    //Node<E> getNode(int index);
     E get(int index);
     String toString();
+
+
+    boolean add(E element, int index);
+    boolean remove(int index);
+    boolean contains(E element);
+    List<E> slicing(int start,int end);
     
     
      
