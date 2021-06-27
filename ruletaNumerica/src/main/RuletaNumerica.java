@@ -9,7 +9,17 @@ package main;
  *
  * @author 
  */
-public class RuletaNumerica {
+public class RuletaNumerica extends Application{
+   /* @Override
+    public void start(Stage primaryStage) throws Exception {
+           Group root = new Group();
+           Scene scene = new Scene(root, 640, 400);
+           primaryStage.setScene(scene);
+           root.setTranslateX(320);
+           root.setTranslateY(200);
+           createScene(root);
+           primaryStage.show();
+    }*/
 
     /**
      * @param args the command line arguments
