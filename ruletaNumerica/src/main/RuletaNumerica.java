@@ -5,27 +5,28 @@
  */
 package main;
 
+import java.security.acl.Group;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 /**
  *
  * @author 
  */
 public class RuletaNumerica extends Application{
-   /* @Override
-    public void start(Stage primaryStage) throws Exception {
-           Group root = new Group();
-           Scene scene = new Scene(root, 640, 400);
-           primaryStage.setScene(scene);
-           root.setTranslateX(320);
-           root.setTranslateY(200);
-           createScene(root);
-           primaryStage.show();
-    }*/
+   
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
