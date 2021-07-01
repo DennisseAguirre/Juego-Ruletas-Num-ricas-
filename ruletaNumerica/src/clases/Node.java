@@ -7,7 +7,7 @@ package clases;
 
 /**
  *
- * @author demera
+ * @author 
  */
 public class Node<E>{
     private E content;

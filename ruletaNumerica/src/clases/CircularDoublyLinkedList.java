@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  *
- * @author Juan Pisco
+ * @author 
  */
 public class CircularDoublyLinkedList<E> implements List<E> {
 
