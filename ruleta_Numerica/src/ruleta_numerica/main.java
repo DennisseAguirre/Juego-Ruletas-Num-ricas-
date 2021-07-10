@@ -32,7 +32,6 @@ public class main extends Application {
       TextField t1 = new TextField();       
       TextField t2 = new TextField();
       TextField t3= new TextField();
-      Circle circle = new Circle(300, 135, 100); 
 
       Button play = new Button("Play");
       play.setAlignment(Pos.CENTER);
@@ -51,7 +50,7 @@ public class main extends Application {
       ObservableList list2 = panel1.getChildren(); 
      
       list.addAll(l1,t1,l2,t2,l3,t3); 
-      list2.addAll(panel2,play,circle);
+      list2.addAll(panel2,play);
      
       Scene scene = new Scene(panel1,900,500);  
       
