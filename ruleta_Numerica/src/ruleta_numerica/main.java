@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package ruleta_numerica;
-
-
 import clases.CircularDoublyLinkedList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -17,6 +15,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -34,7 +33,9 @@ public class main extends Application {
     public static CircularPane circulo1 = new CircularPane();
     public static CircularDoublyLinkedList c1;
     public static CircularDoublyLinkedList c2;
-
+    public static ComboBox combo=new ComboBox();
+    public static Button derecha=new Button("Girar derecha");
+    public static Button izquierda=new Button("Girar izquierda");
     public static CircularPane circulo2 = new CircularPane();
 
     @Override
@@ -65,16 +66,20 @@ public class main extends Application {
         //retrieving the observable list of the HBox 
         ObservableList list = panel2.getChildren();
         ObservableList list2 = panel1.getChildren();
-
+        combo.setVisible(false);
+        izquierda.setVisible(false);
+        derecha.setVisible(false);
         //Adding all the nodes to the observable list (HBox) 
         list.addAll(l1, t1, l2, t2, l3, t3);
         String inputText = t2.getText();
         CircularDoublyLinkedList<Integer> c1 = new CircularDoublyLinkedList();
         CircularDoublyLinkedList<Integer> c2 = new CircularDoublyLinkedList();
         botones(play, c1, c2, t2);
+        llenarCombo();
         p1.setSpacing(40);
         p1.setAlignment(Pos.CENTER);
-        list2.addAll(panel2, play, p1);
+        panel1.setSpacing(10);
+        list2.addAll(panel2, play, p1,combo,izquierda,derecha);
 
         //Creating a scene object
         Scene scene = new Scene(panel1, 900, 500);
@@ -88,8 +93,9 @@ public class main extends Application {
         //Displaying the contents of the stage 
         stage.show();
     }
-
+    
     public static void crearCirculo(CircularDoublyLinkedList c1, CircularDoublyLinkedList c2) {
+        p1.getChildren().clear();
         CircularPane pane = new CircularPane();
         for (int i = 0; i < c1.size(); i++) {
             Button button = new Button("" + c1.get(i));
@@ -106,7 +112,11 @@ public class main extends Application {
         p1.getChildren().addAll(ruleta, ruleta2);
 
     }
-
+    public static void llenarCombo(){
+       combo.getItems().add("Circulo 1");
+       combo.getItems().add("Circulo 2");
+    }
+   
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t2) {
         play.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -130,6 +140,10 @@ public class main extends Application {
 
                     }
                     crearCirculo(c1, c2);
+                    play.setVisible(false);
+                    combo.setVisible(true);
+                    izquierda.setVisible(true);
+                    derecha.setVisible(true);
 
                 }
             }
@@ -141,5 +155,6 @@ public class main extends Application {
    public static void main(String args[]) {
         launch(args);
     }
+
 }
 
