@@ -37,7 +37,7 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             } else {
                 int i = 0;
 
-                for (Node<E> j = last.next.getNext(); j != null; j = j.next) {
+                for (Node<E> j = last.getNext(); j != null; j = j.next) {
                     if (index - 1 == i) {
                         Node<E> nodoAE = j.getNext();
                         j.setNext(nodoAE.getNext());
