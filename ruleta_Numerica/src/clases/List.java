@@ -1,10 +1,6 @@
 
 package clases;
 
-/**
- *
- * @author 
- */
 public interface List <E>{
     int size();
     boolean isEmpty();

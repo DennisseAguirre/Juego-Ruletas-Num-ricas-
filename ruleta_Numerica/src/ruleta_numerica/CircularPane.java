@@ -10,10 +10,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
-/**
- *
- * @author demera
- */
 public class CircularPane extends Pane{
     @Override
     protected void layoutChildren() {

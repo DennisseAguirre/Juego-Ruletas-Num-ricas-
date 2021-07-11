@@ -1,10 +1,6 @@
 
 package clases;
 
-/**
- *
- * @author Juan Pisco
- */
 public class anillo {
 
     public static CircularDoublyLinkedList<Integer> rotarIzquierda(CircularDoublyLinkedList<Integer> lista1) {

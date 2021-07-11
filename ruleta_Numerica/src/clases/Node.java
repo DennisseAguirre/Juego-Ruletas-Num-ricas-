@@ -1,10 +1,6 @@
 
 package clases;
 
-/**
- *
- * @author 
- */
 public class Node<E>{
     private E content;
     private Node<E> next;

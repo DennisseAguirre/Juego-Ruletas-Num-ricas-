@@ -2,10 +2,6 @@ package clases;
 
 import java.util.Iterator;
 
-/**
- *
- * @author 
- */
 public class CircularDoublyLinkedList<E> implements List<E> {
 
     private Node<E> last;

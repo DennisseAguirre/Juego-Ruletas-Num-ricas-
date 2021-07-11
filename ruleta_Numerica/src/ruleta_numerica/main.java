@@ -5,6 +5,7 @@
  */
 package ruleta_numerica;
 
+
 import clases.CircularDoublyLinkedList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -21,13 +22,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import static clases.anillo.eliminar;
 import static clases.anillo.rotarDerecha;
 import static clases.anillo.rotarIzquierda;
+import javafx.scene.control.Alert;
+import javafx.scene.text.Text;
+import javafx.stage.StageStyle;
 
 public class main extends Application {
 
@@ -43,6 +44,8 @@ public class main extends Application {
     public static Button izquierda = new Button("Girar izquierda");
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
+    public static Button ayuda;
+    public static Stage ventana;
 
     @Override
     public void start(Stage stage) {
@@ -58,6 +61,10 @@ public class main extends Application {
         //Creating the play button 
         Button play = new Button("Play");
         play.setAlignment(Pos.CENTER);
+        
+        // Otros botones
+        ayuda=new Button("Ayuda");
+        AyudaUsuario(ayuda);
         //Instantiating the HBox class  
         HBox panel2 = new HBox();
         VBox panel1 = new VBox();
@@ -90,7 +97,7 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
-        list2.addAll(panel2, play, p1, combo, izquierda, derecha, p2);
+        list2.addAll(panel2, play,ayuda, p1, combo, izquierda, derecha, p2);
 
         //Creating a scene object
         Scene scene = new Scene(panel1, 900, 500);
@@ -268,6 +275,29 @@ public class main extends Application {
         p1.getChildren().clear();
         Label l4 = new Label("--PERDISTE--");
         p1.getChildren().addAll(l4);
+    }
+     public static void AyudaUsuario(Button ayuda) {
+        ayuda.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                
+                String mensaje="1.Llenar los datos que le solicitan en la pantalla\n 2. Una vez seleccionado le aparecerá el "
+                        + "# de círculos solicitados con la suma de valores que se encuentran en los círculos.\n"+"3.Abajo le aparecerá"
+                        + "herramientas que le permitirán girar o eliminar la ruleta, recuerde que si primero pone girar, la siguiente operación"
+                        + "tiene que ser eliminar y así sucesivamente.\n"+"4. Recuerde que al girar la ruleta a la derecha le aumentará en uno los valores del círculo respectivo"
+                        + "en cambio, si gira a la izquierda decrecerán en uno y por lo tanto en los 2 casos le cambiará la suma total.\n"
+                        +"5. Tendrá que seguir haciendo estas operaciones hasta que la suma total sea igual a la cantidad que puso en Apuesta inical, en ese caso usted gana"
+                        +"sin embargo en el caso que no lo logré perderá ya sea porque la suma sea menor o le salga algún número negativo.\n"+"Espero que disfrute del Juego.";
+                
+                Alert dialogo=new Alert(Alert.AlertType.INFORMATION);
+                dialogo.setTitle("Instrucciones");
+                dialogo.setHeaderText("Instrucciones");
+                dialogo.setContentText(mensaje);
+                dialogo.initStyle(StageStyle.UTILITY);
+                dialogo.showAndWait();
+                
+            }
+        });
     }
 
     public static void main(String args[]) {

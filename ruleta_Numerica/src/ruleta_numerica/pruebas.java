@@ -6,10 +6,6 @@ import static clases.anillo.eliminar;
 import static clases.anillo.rotarDerecha;
 import static clases.anillo.rotarIzquierda;
 
-/**
- *
- * @author Juan Pisco
- */
 public class pruebas {
     public static void main (String[] args){
         CircularDoublyLinkedList<Integer> lista1 = new CircularDoublyLinkedList<>();
