@@ -255,7 +255,7 @@ public class main extends Application {
         for (int i = 0; i <= c1.size() - 1; i++) {
             if (c1.get(i) < 0) {
                 Perdiste();
-                Label l5 = new Label("un numero es menor que 0 xD");
+                Label l5 = new Label("un numero es menor que 0 ");
                 p1.getChildren().addAll(l5);
             }
         }
@@ -266,7 +266,7 @@ public class main extends Application {
         izquierda.setVisible(false);
         derecha.setVisible(false);
         p1.getChildren().clear();
-        Label l4 = new Label("PERDISTE");
+        Label l4 = new Label("--PERDISTE--");
         p1.getChildren().addAll(l4);
     }
 
