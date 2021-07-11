@@ -34,7 +34,7 @@ public class main extends Application {
     public static Group ruleta = new Group();
     public static Group ruleta2 = new Group();
     public static HBox p1 = new HBox();
-    public static CircularPane circulo1 = new CircularPane();
+//    public static CircularPane circulo1 = new CircularPane();
     public static CircularDoublyLinkedList<Integer> c1= new CircularDoublyLinkedList<>();
     public static CircularDoublyLinkedList<Integer> c2= new CircularDoublyLinkedList<>();
     public static ComboBox combo = new ComboBox();
@@ -150,7 +150,6 @@ public class main extends Application {
                     play.setVisible(false);
                     combo.setVisible(true);
                     izquierda.setVisible(true);
-                    
                     derecha.setVisible(true);
 
                 }
@@ -170,11 +169,13 @@ public class main extends Application {
                     c1 =rotarIzquierda(c1);
                     crearCirculo(c1,c2);
                     System.out.println(c1.toString());
+                    tieneNegativo(c1);
                 }else if(value==("Circulo 2")){
                     System.out.println(c2.toString());
                     c2 =rotarIzquierda(c2);
                     crearCirculo(c1,c2);
                     System.out.println(c2.toString());
+                    tieneNegativo(c2);
                 }
             }
         });
@@ -198,6 +199,25 @@ public class main extends Application {
                 }
             }
         });
+    }
+    
+    public static void tieneNegativo(CircularDoublyLinkedList<Integer> c1){
+        for(int i=0;i<=c1.size()-1;i++){
+            if(c1.get(i)<0){
+                Perdiste();
+                Label l5 = new Label("un numero es menor que 0 xD");
+                p1.getChildren().addAll(l5);
+            }
+        }
+    }
+    
+    public static void Perdiste(){
+        combo.setVisible(false);
+        izquierda.setVisible(false);
+        derecha.setVisible(false);
+        p1.getChildren().clear();
+        Label l4 = new Label("PERDISTE");
+        p1.getChildren().addAll(l4);
     }
     
     public static void main(String args[]) {
