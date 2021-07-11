@@ -176,7 +176,7 @@ public class main extends Application {
                     crearCirculo(c1,c2);
                     System.out.println(c2.toString());
                     tieneNegativo(c2);
-                }
+                }//
             }
         });
     }
