@@ -141,13 +141,6 @@ public class main extends Application {
         Label lTot2 = new Label(Integer.toString(total));
         p2.getChildren().clear();
         p2.getChildren().addAll(lTot1, lTot2);
-//
-////        ruleta.getChildren().clear();
-////        ruleta2.getChildren().clear();
-////        ruleta.getChildren().addAll(pane);
-////        ruleta2.getChildren().addAll(pane2);
-//        p1.getChildren().addAll(ruleta, ruleta2);
-
     }
 
     public static void sumar(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
@@ -252,10 +245,8 @@ public class main extends Application {
                     for (int i = 0; i <= ctodas.size() - 1; i++) {
 
                         if (value.equals("Circulo " + (i + 1))) {
-                            System.out.println("Esta " + ctodas.get(i) + " antes");
                             cRotar.addLast(rotarIzquierda(ctodas.get(i)));
                             cGuardar = (cRotar.get(i));
-                            System.out.println("Esta " + cRotar.get(i) + " despues");
 
                         } else {
                             cRotar.addLast(ctodas.get(i));
@@ -276,6 +267,7 @@ public class main extends Application {
                     p2.getChildren().addAll(lTot1, lTot2);
                     tieneNegativo(cGuardar);
                     turno = 0;
+                    operacion.setText("Te toca eliminar");
                 }
 
             }
@@ -298,10 +290,8 @@ public class main extends Application {
                     for (int i = 0; i <= ctodas.size() - 1; i++) {
 
                         if (value.equals("Circulo " + (i + 1))) {
-                            System.out.println("Esta " + ctodas.get(i) + " antes");
                             cRotar.addLast(rotarDerecha(ctodas.get(i)));
                             //cGuardar=(cRotar.get(i));
-                            System.out.println("Esta " + cRotar.get(i) + " despues");
                         } else {
                             cRotar.addLast(ctodas.get(i));
                         }
@@ -321,6 +311,7 @@ public class main extends Application {
                     p2.getChildren().clear();
                     p2.getChildren().addAll(lTot1, lTot2);
                     turno = 0;
+                    operacion.setText("Te toca eliminar");
                 }
             }
         });
@@ -341,7 +332,6 @@ public class main extends Application {
                         for (int i = 0; i <= ctodas.size() - 1; i++) {
                             ctodasTEMP.addLast(eliminar(ctodas.get(i), value - 1));
                         }
-                        System.out.println(ctodasTEMP.toString());
                         ctodas.clear();
                         for (int i = 0; i <= ctodasTEMP.size() - 1; i++) {
                             ctodas.addLast(ctodasTEMP.get(i));
@@ -354,16 +344,14 @@ public class main extends Application {
                         p2.getChildren().addAll(lTot1, lTot2);
                         llenarCombo2(ctodas.get(0));
                         if (ctodas.get(0).isEmpty()) {
-                            System.out.println("a");
                             p1.getChildren().clear();
-                            System.out.println("b");
                             p2.getChildren().clear();
-                            System.out.println("c");
                             Perdiste();
                             Label l5 = new Label("Se quedo sin objetos a eliminar");
                             p2.getChildren().addAll(l5);
                         }
                         turno = 1;
+                        operacion.setText("Te toca girar");
                     }
                 }
             }
