@@ -48,6 +48,7 @@ public class main extends Application {
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
     public static int numCircul;
+    public static int apuestaA;
     public static Button ayuda;
     public static Stage ventana;
     public static int turno;
@@ -152,6 +153,9 @@ public class main extends Application {
             }
         }
         total = k;
+        if (total==apuestaA){
+            Ganaste();
+        }    
     }
 
     public static void llenarCombo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
@@ -191,9 +195,9 @@ public class main extends Application {
                         CircularDoublyLinkedList<Integer> c = new CircularDoublyLinkedList<>();
                         ctodas.addLast(c);
                     }
-
-                    String apuesta = t3.getText();
-
+                    
+                    apuestaA=Integer.parseInt(t3.getText());
+                    
                     llenarCombo(ctodas);
 
                     for (int i = 0; i <= ctodas.size() - 1; i++) {
@@ -203,11 +207,7 @@ public class main extends Application {
                         }
                     }
 
-//                    for (int i = 0; i < tamano; i++) {
-//                        int numAleatorio2 = (int) (Math.random() * 10);
-//                        c2.addLast(numAleatorio2);
-//
-//                    }
+
                     Label escojaEli = new Label("indice a eliminar: ");
                     p3.getChildren().clear();
                     p3.getChildren().addAll(escojaEli, combo2, eliminar);
@@ -379,6 +379,17 @@ public class main extends Application {
         p2.getChildren().clear();
         p3.getChildren().clear();
         Label l4 = new Label("--PERDISTE--");
+        p1.getChildren().addAll(l4);
+    }
+    
+    public static void Ganaste(){
+        combo.setVisible(false);
+        izquierda.setVisible(false);
+        derecha.setVisible(false);
+        p1.getChildren().clear();
+        p2.getChildren().clear();
+        p3.getChildren().clear();
+        Label l4 = new Label("--Ganaste--");
         p1.getChildren().addAll(l4);
     }
 
