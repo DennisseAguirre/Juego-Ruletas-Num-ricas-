@@ -5,7 +5,6 @@
  */
 package ruleta_numerica;
 
-
 import clases.CircularDoublyLinkedList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -45,6 +44,7 @@ public class main extends Application {
     public static Button derecha = new Button("Girar derecha");
     public static Button izquierda = new Button("Girar izquierda");
     public static Button eliminar = new Button("Eliminar");
+    public static Button comodin = new Button("Comodin");
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
     public static int numCircul;
@@ -52,7 +52,7 @@ public class main extends Application {
     public static Button ayuda;
     public static Stage ventana;
     public static int turno;
-    public static Label operacion=new Label("");
+    public static Label operacion = new Label("");
 
     @Override
     public void start(Stage stage) {
@@ -63,7 +63,7 @@ public class main extends Application {
         TextField t2 = new TextField();
         TextField t3 = new TextField();
 
-        turno=3;
+        turno = 3;
         CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas = new CircularDoublyLinkedList<>();
 
         //Creating the play button 
@@ -94,9 +94,11 @@ public class main extends Application {
         izquierda.setVisible(false);
         derecha.setVisible(false);
         eliminar.setVisible(false);
+        comodin.setVisible(false);
         moverIzquierda(izquierda, ctodas);
         moverDerecha(derecha, ctodas);
         eliminarInd(eliminar, ctodas);
+        pressComodin(comodin);
         //Adding all the nodes to the observable list (HBox) 
         list.addAll(l1, t1, l2, t2, l3, t3);
         //String inputText = t2.getText();
@@ -107,7 +109,7 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
-        list2.addAll(panel2, play, ayuda,operacion, p1, combo, izquierda, derecha, p2, p3);
+        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha, p2, p3);
 
         //Creating a scene object
         Scene scene = new Scene(panel1, 1000, 600);
@@ -153,9 +155,9 @@ public class main extends Application {
             }
         }
         total = k;
-        if (total==apuestaA){
+        if (total == apuestaA) {
             Ganaste();
-        }    
+        }
     }
 
     public static void llenarCombo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
@@ -195,9 +197,9 @@ public class main extends Application {
                         CircularDoublyLinkedList<Integer> c = new CircularDoublyLinkedList<>();
                         ctodas.addLast(c);
                     }
-                    
-                    apuestaA=Integer.parseInt(t3.getText());
-                    
+
+                    apuestaA = Integer.parseInt(t3.getText());
+
                     llenarCombo(ctodas);
 
                     for (int i = 0; i <= ctodas.size() - 1; i++) {
@@ -207,10 +209,9 @@ public class main extends Application {
                         }
                     }
 
-
                     Label escojaEli = new Label("indice a eliminar: ");
                     p3.getChildren().clear();
-                    p3.getChildren().addAll(escojaEli, combo2, eliminar);
+                    p3.getChildren().addAll(escojaEli, combo2, eliminar, comodin);
 
                     crearCirculo(ctodas);
                     play.setVisible(false);
@@ -219,6 +220,7 @@ public class main extends Application {
                     combo.setVisible(true);
                     izquierda.setVisible(true);
                     derecha.setVisible(true);
+                    comodin.setVisible(true);
 
                     llenarCombo2(ctodas.get(0));
 
@@ -236,7 +238,7 @@ public class main extends Application {
                     operacion.setText("Te toca eliminar");
 
                 } else {
-                    
+
                     p1.getChildren().clear();
 
                     String value = (String) combo.getValue();
@@ -265,7 +267,7 @@ public class main extends Application {
                     Label lTot2 = new Label(Integer.toString(total));
                     p2.getChildren().clear();
                     p2.getChildren().addAll(lTot1, lTot2);
-                    tieneNegativo(cGuardar);
+                    tieneNegativoOmas12(cGuardar);
                     turno = 0;
                     operacion.setText("Te toca eliminar");
                 }
@@ -281,7 +283,7 @@ public class main extends Application {
                 if (turno == 0) {
                     operacion.setText("Te toca eliminar");
                 } else {
-                    
+
                     p1.getChildren().clear();
 
                     String value = (String) combo.getValue();
@@ -291,7 +293,7 @@ public class main extends Application {
 
                         if (value.equals("Circulo " + (i + 1))) {
                             cRotar.addLast(rotarDerecha(ctodas.get(i)));
-                            //cGuardar=(cRotar.get(i));
+                            cGuardar=(cRotar.get(i));
                         } else {
                             cRotar.addLast(ctodas.get(i));
                         }
@@ -304,12 +306,12 @@ public class main extends Application {
 
                     crearCirculo(ctodas);
                     sumar(ctodas);
-                    //tieneNegativo(cGuardar);
 
                     Label lTot1 = new Label("Total de suma: ");
                     Label lTot2 = new Label(Integer.toString(total));
                     p2.getChildren().clear();
                     p2.getChildren().addAll(lTot1, lTot2);
+                    tieneNegativoOmas12(cGuardar);
                     turno = 0;
                     operacion.setText("Te toca eliminar");
                 }
@@ -322,9 +324,9 @@ public class main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 if (turno == 1) {
-                     operacion.setText("Te toca girar");
+                    operacion.setText("Te toca girar");
                 } else {
-                    
+
                     if (combo2.getValue() == null) {
                     } else {
                         Integer value = (Integer) combo2.getValue();
@@ -357,15 +359,39 @@ public class main extends Application {
             }
         });
     }
+    
+    public static void pressComodin(Button comodin) {
+        comodin.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (turno == 1) {
+                    turno = 0;
+                    operacion.setText("Te toca eliminar");
+                    comodin.setVisible(false);
+                } else if (turno == 0) {
+                    turno = 1;
+                    operacion.setText("Te toca girar");
+                    comodin.setVisible(false);
+                }else{
+                    
+                }
+            }
+        });
+    }
 
-    public static void tieneNegativo(CircularDoublyLinkedList<Integer> c1) {
+    public static void tieneNegativoOmas12(CircularDoublyLinkedList<Integer> c1) {
         for (int i = 0; i <= c1.size() - 1; i++) {
             if (c1.get(i) < 0) {
                 p1.getChildren().clear();
                 p2.getChildren().clear();
                 Perdiste();
-                Label l5 = new Label("un numero es menor que 0 ");
-
+                Label l5 = new Label("un numero es menor a 0 ");
+                p2.getChildren().addAll(l5);
+            }else if(c1.get(i) > 12){
+                p1.getChildren().clear();
+                p2.getChildren().clear();
+                Perdiste();
+                Label l5 = new Label("un numero es mayor a 12 ");
                 p2.getChildren().addAll(l5);
             }
         }
@@ -381,8 +407,8 @@ public class main extends Application {
         Label l4 = new Label("--PERDISTE--");
         p1.getChildren().addAll(l4);
     }
-    
-    public static void Ganaste(){
+
+    public static void Ganaste() {
         combo.setVisible(false);
         izquierda.setVisible(false);
         derecha.setVisible(false);
