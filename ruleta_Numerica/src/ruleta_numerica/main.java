@@ -5,6 +5,7 @@
  */
 package ruleta_numerica;
 
+
 import clases.CircularDoublyLinkedList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
@@ -50,6 +51,7 @@ public class main extends Application {
     public static Button ayuda;
     public static Stage ventana;
     public static int turno;
+    public static Label operacion=new Label("");
 
     @Override
     public void start(Stage stage) {
@@ -104,7 +106,7 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
-        list2.addAll(panel2, play, ayuda, p1, combo, izquierda, derecha, p2, p3);
+        list2.addAll(panel2, play, ayuda,operacion, p1, combo, izquierda, derecha, p2, p3);
 
         //Creating a scene object
         Scene scene = new Scene(panel1, 1000, 600);
@@ -238,8 +240,10 @@ public class main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 if (turno == 0) {
+                    operacion.setText("Te toca eliminar");
 
                 } else {
+                    
                     p1.getChildren().clear();
 
                     String value = (String) combo.getValue();
@@ -283,8 +287,9 @@ public class main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 if (turno == 0) {
-
+                    operacion.setText("Te toca eliminar");
                 } else {
+                    
                     p1.getChildren().clear();
 
                     String value = (String) combo.getValue();
@@ -326,8 +331,9 @@ public class main extends Application {
             @Override
             public void handle(ActionEvent event) {
                 if (turno == 1) {
-
+                     operacion.setText("Te toca girar");
                 } else {
+                    
                     if (combo2.getValue() == null) {
                     } else {
                         Integer value = (Integer) combo2.getValue();
@@ -398,7 +404,7 @@ public class main extends Application {
                         + "tiene que ser eliminar y así sucesivamente.\n" + "4. Recuerde que al girar la ruleta a la derecha le aumentará en uno los valores del círculo respectivo"
                         + "en cambio, si gira a la izquierda decrecerán en uno y por lo tanto en los 2 casos le cambiará la suma total.\n"
                         + "5. Tendrá que seguir haciendo estas operaciones hasta que la suma total sea igual a la cantidad que puso en Apuesta inical, en ese caso usted gana"
-                        + "sin embargo en el caso que no lo logré perderá ya sea porque la suma sea menor o le salga algún número negativo.\n" + "Espero que disfrute del Juego.";
+                        + "sin embargo en el caso que no lo logré perderá ya sea porque la suma sea menor, le salga algún número negativo o si te quedas sin número.\n" + "Espero que disfrute del Juego.";
                 Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
                 dialogo.setTitle("Instrucciones");
                 dialogo.setHeaderText("Instrucciones");
