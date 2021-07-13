@@ -28,6 +28,7 @@ import static clases.anillo.rotarIzquierda;
 import javafx.scene.control.Alert;
 import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 
 public class main extends Application {
 
@@ -45,6 +46,7 @@ public class main extends Application {
     public static Button izquierda = new Button("Girar izquierda");
     public static Button eliminar = new Button("Eliminar");
     public static Button comodin = new Button("Comodin");
+    public static Button salir=new Button("Salir");
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
     public static int numCircul;
@@ -109,7 +111,7 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
-        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha, p2, p3);
+        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,salir, p2, p3);
 
         //Creating a scene object
         Scene scene = new Scene(panel1, 1000, 600);
@@ -174,6 +176,14 @@ public class main extends Application {
     }
 
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
+        salir.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                JOptionPane.showMessageDialog(null, "Gracias por jugar");
+                System.exit(0);
+            }
+        });
+        
         play.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
