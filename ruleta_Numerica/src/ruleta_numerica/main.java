@@ -43,7 +43,6 @@ public class main extends Application {
     public static HBox p1 = new HBox();
     public static HBox p2 = new HBox();
     public static HBox p3 = new HBox();
-//    public static CircularPane circulo1 = new CircularPane();
     public static CircularDoublyLinkedList<Integer> c1 = new CircularDoublyLinkedList<>();
     public static CircularDoublyLinkedList<Integer> c2 = new CircularDoublyLinkedList<>();
     public static ComboBox combo = new ComboBox();
@@ -65,6 +64,7 @@ public class main extends Application {
 
     @Override
     public void start(Stage stage) {
+        // Elementos que se encontraran al principio del juego
         Label l1 = new Label("Número de círculos: ");
         Label l2 = new Label("Tamaño círculo: ");
         Label l3 = new Label("Apuesta inicial: ");
@@ -75,42 +75,44 @@ public class main extends Application {
         turno = 3;
         CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas = new CircularDoublyLinkedList<>();
 
-        //Creating the play button 
+      // Boton play permitirá a usuario jugar a la ruleta numerica
         Button play = new Button("Play");
         play.setAlignment(Pos.CENTER);
 
-        // Otros botones
+       // Boton ayuda aconsejará al usuario en el caso de que no sepa como se juega
         ayuda = new Button("Ayuda");
         AyudaUsuario(ayuda);
-        //Instantiating the HBox class  
+        
         HBox panel2 = new HBox();
         VBox panel1 = new VBox();
 
-        //Setting the space between the nodes of a HBox pane 
         panel2.setSpacing(10);
 
-        //Setting the margin to the nodes 
+        // Aquí se ajustará los TextField para que tengan margen dentro del panel
         panel2.setMargin(t1, new Insets(20, 20, 20, 20));
         panel2.setMargin(t2, new Insets(20, 20, 20, 20));
         panel2.setMargin(t3, new Insets(20, 20, 20, 20));
 
-        // creando circulos
-        //retrieving the observable list of the HBox 
+        // Aqui se crean objetivos de tipo ObservableList para agregar elementos en los paneles.
         ObservableList list = panel2.getChildren();
         ObservableList list2 = panel1.getChildren();
+        
+        // Botones que por ahora no se mostraran en la pantalla
         combo.setVisible(false);
         combo2.setVisible(false);
         izquierda.setVisible(false);
         derecha.setVisible(false);
         eliminar.setVisible(false);
         comodin.setVisible(false);
+        
+        // metodos para el desarrollo del juego
         moverIzquierda(izquierda, ctodas);
         moverDerecha(derecha, ctodas);
         eliminarInd(eliminar, ctodas);
         pressComodin(comodin);
-        //Adding all the nodes to the observable list (HBox) 
+        
+        // Agregando elementos al panel 2
         list.addAll(l1, t1, l2, t2, l3, t3);
-        //String inputText = t2.getText();
         botones(play, c1, c2, t1, t2, t3, ctodas);
 
         p1.setSpacing(40);
@@ -118,21 +120,16 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
+        // Agregando elementos al panel principal
         list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2, p3, reiniciar, salir);
-
-        //Creating a scene object
+        
+        // Creacion de la escena y stage del programa
         Scene scene = new Scene(panel1, 1100, 700);
-
-        //Setting title to the Stage 
         stage.setTitle("Ruleta Numérica");
-
-        //Adding scene to the stage 
         stage.setScene(scene);
-
-        //Displaying the contents of the stage 
         stage.show();
     }
-
+    // Metodo que creará y mostrará los círculos al usuario 
     public static void crearCirculo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         p1.getChildren().clear();
 
@@ -154,7 +151,7 @@ public class main extends Application {
         p2.getChildren().clear();
         p2.getChildren().addAll(lTot1, lTot2);
     }
-
+    // Metodo que suma los valores que tienen los circulos
     public static void sumar(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         int k = 0;
         for (int i = 0; i <= ctodas.size() - 1; i++) {
@@ -168,20 +165,20 @@ public class main extends Application {
             Ganaste();
         }
     }
-
+    // Metodo que sirve para llenar el ComboBox que mostrará los circulos que hay en la pantalla
     public static void llenarCombo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         for (int i = 0; i <= ctodas.size() - 1; i++) {
             combo.getItems().add("Circulo " + (i + 1));
         }
     }
-
+     // Metodo que sirve para llenar el ComboBox que mostrará los indices de los circulos
     public static void llenarCombo2(CircularDoublyLinkedList<Integer> c1) {
         combo2.getItems().clear();
         for (int i = 0; i <= c1.size() - 1; i++) {
             combo2.getItems().add((i + 1));
         }
     }
-
+    // Metodo que tendra las acciones que haran ciertos botones
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         reiniciar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -261,7 +258,7 @@ public class main extends Application {
         });
 
     }
-
+    // Metodo que moverá el círculo a la izquierda
     public static void moverIzquierda(Button izquierda, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         izquierda.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -307,7 +304,7 @@ public class main extends Application {
             }
         });
     }
-
+    // Metodo que moverá el circulo a la derecha
     public static void moverDerecha(Button derecha, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         derecha.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -350,7 +347,7 @@ public class main extends Application {
             }
         });
     }
-
+    // Metodo encargado de eliminar el indice que señale el usuario
     public static void eliminarInd(Button eliminar, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         eliminar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -391,7 +388,7 @@ public class main extends Application {
             }
         });
     }
-    
+    // Metodo que reinicia la aplicacion
     public static void restartApplication() throws URISyntaxException, IOException { 
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         final File currentJar = new File(main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
@@ -408,7 +405,7 @@ public class main extends Application {
         System.exit(0);
     }
 
-    
+    // Metodo que le dará un comodín al usuario
     public static void pressComodin(Button comodin) {
         comodin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -427,7 +424,7 @@ public class main extends Application {
             }
         });
     }
-
+    // Metodo que verificará si hay numeros negativos en la ruleta 
     public static void tieneNegativoOmas12(CircularDoublyLinkedList<Integer> c1) {
         for (int i = 0; i <= c1.size() - 1; i++) {
             if (c1.get(i) < 0) {
@@ -445,7 +442,7 @@ public class main extends Application {
             }
         }
     }
-
+    // Metodo que le indicará al usuario si perdio
     public static void Perdiste() {
         combo.setVisible(false);
         izquierda.setVisible(false);
@@ -456,7 +453,7 @@ public class main extends Application {
         Label l4 = new Label("--PERDISTE--");
         p1.getChildren().addAll(l4);
     }
-
+    // Metodo que le indicará al usuario si gano
     public static void Ganaste() {
         combo.setVisible(false);
         izquierda.setVisible(false);
@@ -467,7 +464,7 @@ public class main extends Application {
         Label l4 = new Label("--Ganaste--");
         p1.getChildren().addAll(l4);
     }
-
+    // Metodo que le dará unas instrucciones al usuario acerca de como se juega
     public static void AyudaUsuario(Button ayuda) {
         ayuda.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -509,7 +506,7 @@ public class main extends Application {
         }
         return true;
     }
-
+   
     public static void main(String args[]) {
         launch(args);
     }
