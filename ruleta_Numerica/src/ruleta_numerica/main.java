@@ -51,8 +51,8 @@ public class main extends Application {
     public static Button izquierda = new Button("Girar izquierda");
     public static Button eliminar = new Button("Eliminar");
     public static Button comodin = new Button("Comodin");
-    public static Button salir=new Button("Salir");
-    public static Button reiniciar=new Button("Reiniciar");
+    public static Button salir = new Button("Salir");
+    public static Button reiniciar = new Button("Reiniciar");
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
     public static int numCircul;
@@ -60,7 +60,9 @@ public class main extends Application {
     public static Button ayuda;
     public static Stage ventana;
     public static int turno;
+    public static boolean pc = true;
     public static Label operacion = new Label("");
+    public static Label lbPc = new Label("     ");
 
     @Override
     public void start(Stage stage) {
@@ -75,14 +77,14 @@ public class main extends Application {
         turno = 3;
         CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas = new CircularDoublyLinkedList<>();
 
-      // Boton play permitirá a usuario jugar a la ruleta numerica
+        // Boton play permitirá a usuario jugar a la ruleta numerica
         Button play = new Button("Play");
         play.setAlignment(Pos.CENTER);
 
-       // Boton ayuda aconsejará al usuario en el caso de que no sepa como se juega
+        // Boton ayuda aconsejará al usuario en el caso de que no sepa como se juega
         ayuda = new Button("Ayuda");
         AyudaUsuario(ayuda);
-        
+
         HBox panel2 = new HBox();
         VBox panel1 = new VBox();
 
@@ -96,7 +98,7 @@ public class main extends Application {
         // Aqui se crean objetivos de tipo ObservableList para agregar elementos en los paneles.
         ObservableList list = panel2.getChildren();
         ObservableList list2 = panel1.getChildren();
-        
+
         // Botones que por ahora no se mostraran en la pantalla
         combo.setVisible(false);
         combo2.setVisible(false);
@@ -104,13 +106,13 @@ public class main extends Application {
         derecha.setVisible(false);
         eliminar.setVisible(false);
         comodin.setVisible(false);
-        
+
         // metodos para el desarrollo del juego
         moverIzquierda(izquierda, ctodas);
         moverDerecha(derecha, ctodas);
         eliminarInd(eliminar, ctodas);
         pressComodin(comodin);
-        
+
         // Agregando elementos al panel 2
         list.addAll(l1, t1, l2, t2, l3, t3);
         botones(play, c1, c2, t1, t2, t3, ctodas);
@@ -121,14 +123,15 @@ public class main extends Application {
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
         // Agregando elementos al panel principal
-        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2, p3, reiniciar, salir);
-        
+        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha, p2, p3, reiniciar, salir);
+
         // Creacion de la escena y stage del programa
         Scene scene = new Scene(panel1, 1100, 700);
         stage.setTitle("Ruleta Numérica");
         stage.setScene(scene);
         stage.show();
     }
+
     // Metodo que creará y mostrará los círculos al usuario 
     public static void crearCirculo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         p1.getChildren().clear();
@@ -151,6 +154,7 @@ public class main extends Application {
         p2.getChildren().clear();
         p2.getChildren().addAll(lTot1, lTot2);
     }
+
     // Metodo que suma los valores que tienen los circulos
     public static void sumar(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         int k = 0;
@@ -165,19 +169,22 @@ public class main extends Application {
             Ganaste();
         }
     }
+
     // Metodo que sirve para llenar el ComboBox que mostrará los circulos que hay en la pantalla
     public static void llenarCombo(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         for (int i = 0; i <= ctodas.size() - 1; i++) {
             combo.getItems().add("Circulo " + (i + 1));
         }
     }
-     // Metodo que sirve para llenar el ComboBox que mostrará los indices de los circulos
+    // Metodo que sirve para llenar el ComboBox que mostrará los indices de los circulos
+
     public static void llenarCombo2(CircularDoublyLinkedList<Integer> c1) {
         combo2.getItems().clear();
         for (int i = 0; i <= c1.size() - 1; i++) {
             combo2.getItems().add((i + 1));
         }
     }
+
     // Metodo que tendra las acciones que haran ciertos botones
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         reiniciar.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,8 +200,7 @@ public class main extends Application {
                 }
             }
         });
-        
-        
+
         salir.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -202,7 +208,7 @@ public class main extends Application {
                 System.exit(0);
             }
         });
-        
+
         play.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -240,7 +246,7 @@ public class main extends Application {
 
                     Label escojaEli = new Label("indice a eliminar: ");
                     p3.getChildren().clear();
-                    p3.getChildren().addAll(escojaEli, combo2, eliminar, comodin);
+                    p3.getChildren().addAll(escojaEli, combo2, eliminar, comodin, lbPc);
 
                     crearCirculo(ctodas);
                     play.setVisible(false);
@@ -258,6 +264,7 @@ public class main extends Application {
         });
 
     }
+
     // Metodo que moverá el círculo a la izquierda
     public static void moverIzquierda(Button izquierda, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         izquierda.setOnAction(new EventHandler<ActionEvent>() {
@@ -267,43 +274,51 @@ public class main extends Application {
                     operacion.setText("Te toca eliminar");
 
                 } else {
+                    pc = true;
+                    int numAleatorio = (int) (Math.random() * 5);
+                    if (numAleatorio == 0) {
+                        pcDecide(ctodas);
+                    } else {
 
-                    p1.getChildren().clear();
+                        p1.getChildren().clear();
 
-                    String value = (String) combo.getValue();
-                    CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
-                    CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
-                    for (int i = 0; i <= ctodas.size() - 1; i++) {
+                        String value = (String) combo.getValue();
+                        CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
+                        CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
+                        for (int i = 0; i <= ctodas.size() - 1; i++) {
 
-                        if (value.equals("Circulo " + (i + 1))) {
-                            cRotar.addLast(rotarIzquierda(ctodas.get(i)));
-                            cGuardar = (cRotar.get(i));
+                            if (value.equals("Circulo " + (i + 1))) {
+                                cRotar.addLast(rotarIzquierda(ctodas.get(i)));
+                                cGuardar = (cRotar.get(i));
 
-                        } else {
-                            cRotar.addLast(ctodas.get(i));
+                            } else {
+                                cRotar.addLast(ctodas.get(i));
+                            }
                         }
+
+                        ctodas.clear();
+                        for (int i = 0; i <= cRotar.size() - 1; i++) {
+                            ctodas.addLast(cRotar.get(i));
+
+                        }
+
+                        crearCirculo(ctodas);
+                        sumar(ctodas);
+                        Label lTot1 = new Label("Total de suma: ");
+                        Label lTot2 = new Label(Integer.toString(total));
+                        p2.getChildren().clear();
+                        p2.getChildren().addAll(lTot1, lTot2);
+                        tieneNegativoOmas12(cGuardar);
+                        turno = 0;
+                        operacion.setText("Te toca eliminar");
+                        lbPc.setText("     ");
                     }
-
-                    ctodas.clear();
-                    for (int i = 0; i <= cRotar.size() - 1; i++) {
-                        ctodas.addLast(cRotar.get(i));
-
-                    }
-
-                    crearCirculo(ctodas);
-                    sumar(ctodas);
-                    Label lTot1 = new Label("Total de suma: ");
-                    Label lTot2 = new Label(Integer.toString(total));
-                    p2.getChildren().clear();
-                    p2.getChildren().addAll(lTot1, lTot2);
-                    tieneNegativoOmas12(cGuardar);
-                    turno = 0;
-                    operacion.setText("Te toca eliminar");
                 }
 
             }
         });
     }
+
     // Metodo que moverá el circulo a la derecha
     public static void moverDerecha(Button derecha, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         derecha.setOnAction(new EventHandler<ActionEvent>() {
@@ -312,41 +327,49 @@ public class main extends Application {
                 if (turno == 0) {
                     operacion.setText("Te toca eliminar");
                 } else {
+                    pc = false;
+                    int numAleatorio = (int) (Math.random() * 5);
+                    if (numAleatorio == 0) {
+                        pcDecide(ctodas);
+                    } else {
 
-                    p1.getChildren().clear();
+                        p1.getChildren().clear();
 
-                    String value = (String) combo.getValue();
-                    CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
-                    CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
-                    for (int i = 0; i <= ctodas.size() - 1; i++) {
+                        String value = (String) combo.getValue();
+                        CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
+                        CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
+                        for (int i = 0; i <= ctodas.size() - 1; i++) {
 
-                        if (value.equals("Circulo " + (i + 1))) {
-                            cRotar.addLast(rotarDerecha(ctodas.get(i)));
-                            cGuardar=(cRotar.get(i));
-                        } else {
-                            cRotar.addLast(ctodas.get(i));
+                            if (value.equals("Circulo " + (i + 1))) {
+                                cRotar.addLast(rotarDerecha(ctodas.get(i)));
+                                cGuardar = (cRotar.get(i));
+                            } else {
+                                cRotar.addLast(ctodas.get(i));
+                            }
                         }
+                        ctodas.clear();
+                        for (int i = 0; i <= cRotar.size() - 1; i++) {
+                            ctodas.addLast(cRotar.get(i));
+
+                        }
+
+                        crearCirculo(ctodas);
+                        sumar(ctodas);
+
+                        Label lTot1 = new Label("Total de suma: ");
+                        Label lTot2 = new Label(Integer.toString(total));
+                        p2.getChildren().clear();
+                        p2.getChildren().addAll(lTot1, lTot2);
+                        tieneNegativoOmas12(cGuardar);
+                        turno = 0;
+                        operacion.setText("Te toca eliminar");
+                        lbPc.setText("     ");
                     }
-                    ctodas.clear();
-                    for (int i = 0; i <= cRotar.size() - 1; i++) {
-                        ctodas.addLast(cRotar.get(i));
-
-                    }
-
-                    crearCirculo(ctodas);
-                    sumar(ctodas);
-
-                    Label lTot1 = new Label("Total de suma: ");
-                    Label lTot2 = new Label(Integer.toString(total));
-                    p2.getChildren().clear();
-                    p2.getChildren().addAll(lTot1, lTot2);
-                    tieneNegativoOmas12(cGuardar);
-                    turno = 0;
-                    operacion.setText("Te toca eliminar");
                 }
             }
         });
     }
+
     // Metodo encargado de eliminar el indice que señale el usuario
     public static void eliminarInd(Button eliminar, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         eliminar.setOnAction(new EventHandler<ActionEvent>() {
@@ -383,18 +406,19 @@ public class main extends Application {
                         }
                         turno = 1;
                         operacion.setText("Te toca girar");
+                        lbPc.setText("     ");
                     }
                 }
             }
         });
     }
+
     // Metodo que reinicia la aplicacion
-    public static void restartApplication() throws URISyntaxException, IOException { 
+    public static void restartApplication() throws URISyntaxException, IOException {
         final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         final File currentJar = new File(main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        /* is it a jar file? */
         if (!currentJar.getName().endsWith(".jar")) {
-            return; /* Build command: java -jar application.jar */
+            return;
         }
         final ArrayList<String> command = new ArrayList<String>();
         command.add(javaBin);
@@ -418,12 +442,13 @@ public class main extends Application {
                     turno = 1;
                     operacion.setText("Te toca girar");
                     comodin.setVisible(false);
-                }else{
-                    
+                } else {
+
                 }
             }
         });
     }
+
     // Metodo que verificará si hay numeros negativos en la ruleta 
     public static void tieneNegativoOmas12(CircularDoublyLinkedList<Integer> c1) {
         for (int i = 0; i <= c1.size() - 1; i++) {
@@ -433,7 +458,7 @@ public class main extends Application {
                 Perdiste();
                 Label l5 = new Label("un numero es menor a 0 ");
                 p2.getChildren().addAll(l5);
-            }else if(c1.get(i) > 12){
+            } else if (c1.get(i) > 12) {
                 p1.getChildren().clear();
                 p2.getChildren().clear();
                 Perdiste();
@@ -442,6 +467,75 @@ public class main extends Application {
             }
         }
     }
+
+    public static void pcDecide(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
+        if (pc == true) {
+            p1.getChildren().clear();
+            lbPc.setText("     La Pc decicio que va a rotar a la derecha.");
+
+            String value = (String) combo.getValue();
+            CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
+            CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
+            for (int i = 0; i <= ctodas.size() - 1; i++) {
+
+                if (value.equals("Circulo " + (i + 1))) {
+                    cRotar.addLast(rotarDerecha(ctodas.get(i)));
+                    cGuardar = (cRotar.get(i));
+                } else {
+                    cRotar.addLast(ctodas.get(i));
+                }
+            }
+            ctodas.clear();
+            for (int i = 0; i <= cRotar.size() - 1; i++) {
+                ctodas.addLast(cRotar.get(i));
+
+            }
+
+            crearCirculo(ctodas);
+            sumar(ctodas);
+
+            Label lTot1 = new Label("Total de suma: ");
+            Label lTot2 = new Label(Integer.toString(total));
+            p2.getChildren().clear();
+            p2.getChildren().addAll(lTot1, lTot2);
+            tieneNegativoOmas12(cGuardar);
+            turno = 0;
+            operacion.setText("Te toca eliminar");
+
+        } else if (pc == false) {
+            p1.getChildren().clear();
+            lbPc.setText("     La Pc decicio que va a rotar a la derecha.");
+
+            String value = (String) combo.getValue();
+            CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
+            CircularDoublyLinkedList<Integer> cGuardar = new CircularDoublyLinkedList<>();
+            for (int i = 0; i <= ctodas.size() - 1; i++) {
+                if (value.equals("Circulo " + (i + 1))) {
+                    cRotar.addLast(rotarIzquierda(ctodas.get(i)));
+                    cGuardar = (cRotar.get(i));
+                } else {
+                    cRotar.addLast(ctodas.get(i));
+                }
+            }
+
+            ctodas.clear();
+            for (int i = 0; i <= cRotar.size() - 1; i++) {
+                ctodas.addLast(cRotar.get(i));
+
+            }
+
+            crearCirculo(ctodas);
+            sumar(ctodas);
+            Label lTot1 = new Label("Total de suma: ");
+            Label lTot2 = new Label(Integer.toString(total));
+            p2.getChildren().clear();
+            p2.getChildren().addAll(lTot1, lTot2);
+            tieneNegativoOmas12(cGuardar);
+            turno = 0;
+            operacion.setText("Te toca eliminar");
+        }
+    }
+
     // Metodo que le indicará al usuario si perdio
     public static void Perdiste() {
         combo.setVisible(false);
@@ -453,6 +547,7 @@ public class main extends Application {
         Label l4 = new Label("--PERDISTE--");
         p1.getChildren().addAll(l4);
     }
+
     // Metodo que le indicará al usuario si gano
     public static void Ganaste() {
         combo.setVisible(false);
@@ -464,6 +559,7 @@ public class main extends Application {
         Label l4 = new Label("--Ganaste--");
         p1.getChildren().addAll(l4);
     }
+
     // Metodo que le dará unas instrucciones al usuario acerca de como se juega
     public static void AyudaUsuario(Button ayuda) {
         ayuda.setOnAction(new EventHandler<ActionEvent>() {
@@ -506,7 +602,7 @@ public class main extends Application {
         }
         return true;
     }
-   
+
     public static void main(String args[]) {
         launch(args);
     }
