@@ -25,6 +25,12 @@ import javafx.stage.Stage;
 import static clases.anillo.eliminar;
 import static clases.anillo.rotarDerecha;
 import static clases.anillo.rotarIzquierda;
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Alert;
 import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
@@ -47,6 +53,7 @@ public class main extends Application {
     public static Button eliminar = new Button("Eliminar");
     public static Button comodin = new Button("Comodin");
     public static Button salir=new Button("Salir");
+    public static Button reiniciar=new Button("Reiniciar");
     public static CircularPane circulo2 = new CircularPane();
     public static int total;
     public static int numCircul;
@@ -111,10 +118,10 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
-        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,salir, p2, p3);
+        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2, p3, reiniciar, salir);
 
         //Creating a scene object
-        Scene scene = new Scene(panel1, 1000, 600);
+        Scene scene = new Scene(panel1, 1100, 700);
 
         //Setting title to the Stage 
         stage.setTitle("Ruleta Numérica");
@@ -176,6 +183,21 @@ public class main extends Application {
     }
 
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
+        reiniciar.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                JOptionPane.showMessageDialog(null, "Volvamos a empezar");
+                try {
+                    restartApplication();
+                } catch (URISyntaxException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        
+        
         salir.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -369,6 +391,23 @@ public class main extends Application {
             }
         });
     }
+    
+    public static void restartApplication() throws URISyntaxException, IOException { 
+        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+        final File currentJar = new File(main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+        /* is it a jar file? */
+        if (!currentJar.getName().endsWith(".jar")) {
+            return; /* Build command: java -jar application.jar */
+        }
+        final ArrayList<String> command = new ArrayList<String>();
+        command.add(javaBin);
+        command.add("-jar");
+        command.add(currentJar.getPath());
+        final ProcessBuilder builder = new ProcessBuilder(command);
+        builder.start();
+        System.exit(0);
+    }
+
     
     public static void pressComodin(Button comodin) {
         comodin.setOnAction(new EventHandler<ActionEvent>() {
