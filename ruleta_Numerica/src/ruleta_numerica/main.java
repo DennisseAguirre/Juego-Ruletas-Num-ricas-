@@ -87,7 +87,7 @@ public class main extends Application {
 
         HBox panel2 = new HBox();
         VBox panel1 = new VBox();
-
+        HBox panel_mover=new HBox();
         panel2.setSpacing(10);
 
         // Aquí se ajustará los TextField para que tengan margen dentro del panel
@@ -122,8 +122,10 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
+        panel_mover.setSpacing(10);
+        panel_mover.getChildren().addAll(combo,izquierda,derecha);
         // Agregando elementos al panel principal
-        list2.addAll(panel2, play, ayuda, operacion, p1, combo, izquierda, derecha, p2, p3, reiniciar, salir);
+        list2.addAll(panel2, play, ayuda, operacion, p1, panel_mover, p2, p3, reiniciar, salir);
 
         // Creacion de la escena y stage del programa
         Scene scene = new Scene(panel1, 1100, 700);
@@ -471,7 +473,7 @@ public class main extends Application {
     public static void pcDecide(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         if (pc == true) {
             p1.getChildren().clear();
-            lbPc.setText("     La Pc decicio que va a rotar a la derecha.");
+            lbPc.setText("     La Pc decidio que va a rotar a la derecha.");
 
             String value = (String) combo.getValue();
             CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();

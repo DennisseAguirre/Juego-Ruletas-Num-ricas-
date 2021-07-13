@@ -9,7 +9,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
-
+// Clase que sirve para que los nodos se muestren al usuario de forma circular
 public class CircularPane extends Pane{
     @Override
     protected void layoutChildren() {
