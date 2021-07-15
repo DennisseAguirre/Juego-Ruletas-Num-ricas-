@@ -14,8 +14,8 @@ public class PanelCircular extends Pane{
     
     @Override
     protected void layoutChildren() {
-        final int radio = 100;
-        final double aumento = 360 / getChildren().size();
+        int radio = 100;
+        double aumento = 360 / getChildren().size();
         double angulos = 0;
         for (Node node : getChildren()) {
             double valor_x = radio * Math.cos(Math.toRadians(angulos)) + getWidth() / 2;
