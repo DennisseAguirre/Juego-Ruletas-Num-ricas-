@@ -2,7 +2,7 @@
 package clases;
 
 public class anillo {
-
+    // Clase que manejará las operaciones que harán los anillos
     public static CircularDoublyLinkedList<Integer> rotarIzquierda(CircularDoublyLinkedList<Integer> lista1) {
         Integer primero = lista1.getFirst();
         CircularDoublyLinkedList<Integer> lista2= new CircularDoublyLinkedList<>();

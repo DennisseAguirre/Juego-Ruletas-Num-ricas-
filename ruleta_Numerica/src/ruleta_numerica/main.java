@@ -510,7 +510,7 @@ public class main extends Application {
         System.exit(0);
     }
 
-    // Metodo que le dará un comodín al usuario
+    // Metodo que le dará un comodín al usuario para cambiar la operación de los circulos
     public static void pressComodin(Button comodin) {
         comodin.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -556,7 +556,7 @@ public class main extends Application {
             }
         }
     }
-
+    // Metodo que hará que la pc decida rotar a la derecha 
     public static void pcDecide(CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
         if (pc == true) {
             p1.getChildren().clear();

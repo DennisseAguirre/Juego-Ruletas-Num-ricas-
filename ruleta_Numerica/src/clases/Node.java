@@ -1,6 +1,6 @@
 
 package clases;
-
+// Los elemento que tendrán un nodo
 public class Node<E>{
     private E content;
     private Node<E> next;

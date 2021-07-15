@@ -1,6 +1,6 @@
 
 package clases;
-
+// interface que establece los metodos que tendra una lista
 public interface List <E>{
     int size();
     boolean isEmpty();
