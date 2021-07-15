@@ -43,6 +43,8 @@ public class main extends Application {
     public static HBox p1 = new HBox();
     public static HBox p2 = new HBox();
     public static HBox p3 = new HBox();
+    public static HBox p4 = new HBox();
+    
     public static CircularDoublyLinkedList<Integer> c1 = new CircularDoublyLinkedList<>();
     public static CircularDoublyLinkedList<Integer> c2 = new CircularDoublyLinkedList<>();
     public static ComboBox combo = new ComboBox();
@@ -53,7 +55,7 @@ public class main extends Application {
     public static Button comodin = new Button("Comodin");
     public static Button salir = new Button("Salir");
     public static Button reiniciar = new Button("Reiniciar");
-    public static CircularPane circulo2 = new CircularPane();
+    public static PanelCircular circulo2 = new PanelCircular();
     public static int total;
     public static int numCircul;
     public static int apuestaA;
@@ -68,11 +70,27 @@ public class main extends Application {
     public void start(Stage stage) {
         // Elementos que se encontraran al principio del juego
         Label l1 = new Label("Número de círculos: ");
+        l1.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         Label l2 = new Label("Tamaño círculo: ");
+        l2.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         Label l3 = new Label("Apuesta inicial: ");
+        l3.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         TextField t1 = new TextField();
+        t1.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        
         TextField t2 = new TextField();
+        t2.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        
         TextField t3 = new TextField();
+        t3.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        
+        Label principal = new Label("Juego De Ruletas");
+        principal.setStyle("-fx-alignment: center ");
+        principal.setStyle("-fx-font: normal bold 30px 'serif' ");
+        principal.setAlignment(Pos.CENTER);
 
         turno = 3;
         CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas = new CircularDoublyLinkedList<>();
@@ -83,10 +101,14 @@ public class main extends Application {
 
         // Boton ayuda aconsejará al usuario en el caso de que no sepa como se juega
         ayuda = new Button("Ayuda");
+        ayuda.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         AyudaUsuario(ayuda);
 
         HBox panel2 = new HBox();
         VBox panel1 = new VBox();
+        VBox panel3 = new VBox();
+        HBox panel4 = new HBox();
+        
         HBox panel_mover=new HBox();
         panel2.setSpacing(10);
 
@@ -98,14 +120,20 @@ public class main extends Application {
         // Aqui se crean objetivos de tipo ObservableList para agregar elementos en los paneles.
         ObservableList list = panel2.getChildren();
         ObservableList list2 = panel1.getChildren();
+        ObservableList list3 = panel3.getChildren();
 
         // Botones que por ahora no se mostraran en la pantalla
         combo.setVisible(false);
         combo2.setVisible(false);
         izquierda.setVisible(false);
+        izquierda.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+        
         derecha.setVisible(false);
+        derecha.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         eliminar.setVisible(false);
+        eliminar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         comodin.setVisible(false);
+        comodin.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
 
         // metodos para el desarrollo del juego
         moverIzquierda(izquierda, ctodas);
@@ -122,10 +150,15 @@ public class main extends Application {
         p2.setSpacing(40);
         p2.setAlignment(Pos.CENTER);
         panel1.setSpacing(10);
+        
         panel_mover.setSpacing(10);
+        
+        list3.addAll(principal);
+        list2.addAll(panel3,panel4,panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2,p4, p3, reiniciar, salir);
+        
         panel_mover.getChildren().addAll(combo,izquierda,derecha);
         // Agregando elementos al panel principal
-        list2.addAll(panel2, play, ayuda, operacion, p1, panel_mover, p2, p3, reiniciar, salir);
+        
 
         // Creacion de la escena y stage del programa
         Scene scene = new Scene(panel1, 1100, 700);
@@ -140,10 +173,12 @@ public class main extends Application {
 
         for (int i = 0; i <= ctodas.size() - 1; i++) {
             Group ruletaTemp = new Group();
-            CircularPane pane = new CircularPane();
+            PanelCircular pane = new PanelCircular();
             for (int e = 0; e <= ctodas.get(i).size() - 1; e++) {
 
                 Button button = new Button("" + ctodas.get(i).get(e));
+                button.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
+                
                 pane.getChildren().add(button);
             }
             ruletaTemp.getChildren().addAll(pane);
@@ -152,7 +187,10 @@ public class main extends Application {
 
         sumar(ctodas);
         Label lTot1 = new Label("Total de suma: ");
+        lTot1.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         Label lTot2 = new Label(Integer.toString(total));
+        lTot2.setStyle("-fx-font: normal bold 12px 'serif' ");
         p2.getChildren().clear();
         p2.getChildren().addAll(lTot1, lTot2);
     }
@@ -189,6 +227,7 @@ public class main extends Application {
 
     // Metodo que tendra las acciones que haran ciertos botones
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
+        reiniciar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         reiniciar.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -203,6 +242,7 @@ public class main extends Application {
             }
         });
 
+        salir.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         salir.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -211,6 +251,7 @@ public class main extends Application {
             }
         });
 
+        play.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         play.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -219,11 +260,15 @@ public class main extends Application {
                 String aux3 = t3.getText().trim();
                 if (aux1.length() == 0 || aux2.length() == 0 || aux3.length() == 0) {
                     Label lError1 = new Label("Porfavor llene todos los espacios.");
+                    lError1.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                     p1.getChildren().clear();
                     p1.getChildren().addAll(lError1);
 
                 } else if (!convInt(aux1) || !convInt(aux2) || !convInt(aux3)) {
                     Label lError1 = new Label("Porfavor ingrese solo numeros Naturales.");
+                    lError1.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                     p1.getChildren().clear();
                     p1.getChildren().addAll(lError1);
                 } else {
@@ -247,14 +292,30 @@ public class main extends Application {
                     }
 
                     Label escojaEli = new Label("indice a eliminar: ");
+                    escojaEli.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                     p3.getChildren().clear();
                     p3.getChildren().addAll(escojaEli, combo2, eliminar, comodin, lbPc);
-
+                    p3.setSpacing(10);
+                    ////////////////////////////////////////////////////////////
+                    Label union = new Label("Girar: ");
+                    union.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    p4.getChildren().clear();
+                    p4.getChildren().addAll(union, combo, izquierda, derecha);
+                    p4.setSpacing(10);
+                    ////////////////////////////////////////////////////////////
+                    
                     crearCirculo(ctodas);
                     play.setVisible(false);
                     eliminar.setVisible(true);
                     combo2.setVisible(true);
+                    combo2.setStyle("-fx-border-color:#E6E6E6");
+                    combo2.setStyle("-fx-border-style:solid");
+                    
                     combo.setVisible(true);
+                    combo.setStyle("-fx-border-color:#E6E6E6");
+                    combo.setStyle("-fx-border-style:solid");
+                    
                     izquierda.setVisible(true);
                     derecha.setVisible(true);
                     comodin.setVisible(true);
@@ -274,6 +335,8 @@ public class main extends Application {
             public void handle(ActionEvent event) {
                 if (turno == 0) {
                     operacion.setText("Te toca eliminar");
+                    operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
 
                 } else {
                     pc = true;
@@ -313,6 +376,8 @@ public class main extends Application {
                         tieneNegativoOmas12(cGuardar);
                         turno = 0;
                         operacion.setText("Te toca eliminar");
+                        operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                        
                         lbPc.setText("     ");
                     }
                 }
@@ -328,6 +393,8 @@ public class main extends Application {
             public void handle(ActionEvent event) {
                 if (turno == 0) {
                     operacion.setText("Te toca eliminar");
+                    operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                 } else {
                     pc = false;
                     int numAleatorio = (int) (Math.random() * 5);
@@ -365,6 +432,8 @@ public class main extends Application {
                         tieneNegativoOmas12(cGuardar);
                         turno = 0;
                         operacion.setText("Te toca eliminar");
+                        operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                        
                         lbPc.setText("     ");
                     }
                 }
@@ -379,6 +448,8 @@ public class main extends Application {
             public void handle(ActionEvent event) {
                 if (turno == 1) {
                     operacion.setText("Te toca girar");
+                    operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                 } else {
 
                     if (combo2.getValue() == null) {
@@ -395,7 +466,11 @@ public class main extends Application {
                         crearCirculo(ctodas);
                         sumar(ctodas);
                         Label lTot1 = new Label("Total de suma: ");
+                        lTot1.setStyle("-fx-font: normal bold 12px 'serif' ");
+                        
                         Label lTot2 = new Label(Integer.toString(total));
+                        lTot2.setStyle("-fx-font: normal bold 12px 'serif' ");
+                        
                         p2.getChildren().clear();
                         p2.getChildren().addAll(lTot1, lTot2);
                         llenarCombo2(ctodas.get(0));
@@ -404,10 +479,14 @@ public class main extends Application {
                             p2.getChildren().clear();
                             Perdiste();
                             Label l5 = new Label("Se quedo sin objetos a eliminar");
+                            l5.setStyle("-fx-font: normal bold 12px 'serif' ");
+                            
                             p2.getChildren().addAll(l5);
                         }
                         turno = 1;
                         operacion.setText("Te toca girar");
+                        operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                        
                         lbPc.setText("     ");
                     }
                 }
@@ -439,10 +518,14 @@ public class main extends Application {
                 if (turno == 1) {
                     turno = 0;
                     operacion.setText("Te toca eliminar");
+                    operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                     comodin.setVisible(false);
                 } else if (turno == 0) {
                     turno = 1;
                     operacion.setText("Te toca girar");
+                    operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+                    
                     comodin.setVisible(false);
                 } else {
 
@@ -459,12 +542,16 @@ public class main extends Application {
                 p2.getChildren().clear();
                 Perdiste();
                 Label l5 = new Label("un numero es menor a 0 ");
+                l5.setStyle("-fx-font: normal bold 12px 'serif' ");
+                
                 p2.getChildren().addAll(l5);
             } else if (c1.get(i) > 12) {
                 p1.getChildren().clear();
                 p2.getChildren().clear();
                 Perdiste();
                 Label l5 = new Label("un numero es mayor a 12 ");
+                l5.setStyle("-fx-font: normal bold 12px 'serif' ");
+                
                 p2.getChildren().addAll(l5);
             }
         }
@@ -474,6 +561,7 @@ public class main extends Application {
         if (pc == true) {
             p1.getChildren().clear();
             lbPc.setText("     La Pc decidio que va a rotar a la derecha.");
+            lbPc.setStyle("-fx-font: normal bold 12px 'serif' ");
 
             String value = (String) combo.getValue();
             CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
@@ -497,16 +585,23 @@ public class main extends Application {
             sumar(ctodas);
 
             Label lTot1 = new Label("Total de suma: ");
+            lTot1.setStyle("-fx-font: normal bold 12px 'serif' ");
+            
             Label lTot2 = new Label(Integer.toString(total));
+            lTot2.setStyle("-fx-font: normal bold 12px 'serif' ");
+            
             p2.getChildren().clear();
             p2.getChildren().addAll(lTot1, lTot2);
             tieneNegativoOmas12(cGuardar);
             turno = 0;
             operacion.setText("Te toca eliminar");
+            operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
+            
 
         } else if (pc == false) {
             p1.getChildren().clear();
             lbPc.setText("     La Pc decicio que va a rotar a la derecha.");
+            lbPc.setStyle("-fx-font: normal bold 12px 'serif' ");
 
             String value = (String) combo.getValue();
             CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> cRotar = new CircularDoublyLinkedList<>();
@@ -529,12 +624,17 @@ public class main extends Application {
             crearCirculo(ctodas);
             sumar(ctodas);
             Label lTot1 = new Label("Total de suma: ");
+            lTot1.setStyle("-fx-font: normal bold 12px 'serif' ");
+            
             Label lTot2 = new Label(Integer.toString(total));
+            lTot2.setStyle("-fx-font: normal bold 12px 'serif' ");
+            
             p2.getChildren().clear();
             p2.getChildren().addAll(lTot1, lTot2);
             tieneNegativoOmas12(cGuardar);
             turno = 0;
             operacion.setText("Te toca eliminar");
+            operacion.setStyle("-fx-font: normal bold 12px 'serif' ");
         }
     }
 
@@ -547,6 +647,8 @@ public class main extends Application {
         p2.getChildren().clear();
         p3.getChildren().clear();
         Label l4 = new Label("--PERDISTE--");
+        l4.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         p1.getChildren().addAll(l4);
     }
 
@@ -559,6 +661,8 @@ public class main extends Application {
         p2.getChildren().clear();
         p3.getChildren().clear();
         Label l4 = new Label("--Ganaste--");
+        l4.setStyle("-fx-font: normal bold 12px 'serif' ");
+        
         p1.getChildren().addAll(l4);
     }
 
@@ -567,13 +671,20 @@ public class main extends Application {
         ayuda.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                String mensaje = "1.Llenar los datos que le solicitan en la pantalla\n 2. Una vez seleccionado le aparecerá el "
-                        + "# de círculos solicitados con la suma de valores que se encuentran en los círculos.\n" + "3.Abajo le aparecerá"
+                String mensaje = 
+                        "1.Llenar los datos que le solicitan en la pantalla y aplasta la opción Play.\n "
+                        + "2.Una vez seleccionado le aparecerá el "
+                        + "# de círculos solicitados con la suma de valores que se encuentran en los círculos.\n" 
+                        + "3.Abajo le aparecerá "
                         + "herramientas que le permitirán girar o eliminar la ruleta, recuerde que si primero pone girar, la siguiente operación"
-                        + "tiene que ser eliminar y así sucesivamente.\n" + "4. Recuerde que al girar la ruleta a la derecha le aumentará en uno los valores del círculo respectivo"
-                        + "en cambio, si gira a la izquierda decrecerán en uno y por lo tanto en los 2 casos le cambiará la suma total.\n"
-                        + "5. Tendrá que seguir haciendo estas operaciones hasta que la suma total sea igual a la cantidad que puso en Apuesta inical, en ese caso usted gana"
-                        + "sin embargo en el caso que no lo logré perderá ya sea porque la suma sea menor, le salga algún número negativo o si te quedas sin número.\n" + "Espero que disfrute del Juego.";
+                        + " tiene que ser eliminar y así sucesivamente.\n" + "4. Recuerde que al girar la ruleta a la derecha le aumentará en uno los valores del círculo respectivo"
+                        + " en cambio, si gira a la izquierda decrecerán en uno y por lo tanto en los 2 casos le cambiará la suma total.\n"
+                        + "5. Tendrá que seguir haciendo estas operaciones hasta que la suma total sea igual a la cantidad que puso en Apuesta inical, en ese caso usted gana "
+                        + "sin embargo en el caso que no lo logré perderá ya sea porque la suma sea menor, le salga algún número negativo o si te quedas sin número.\n" 
+                        +"6. Usted decide que movimiento hacer al principio y de ahi la máquina a traves de un texto le indica cuál debe ser su siguiente movimiento.\n "
+                        + "7. Tiene una opción llamada comodín que le permitirá cambiar de movimiento, pero solo lo puede activar una vez. \n"
+                        + "8. Cada que gire PUEDE que la computadora cambie la dirección del giro.\n"
+                        + "Espero que disfrute del Juego.";
                 Alert dialogo = new Alert(Alert.AlertType.INFORMATION);
                 dialogo.setTitle("Instrucciones");
                 dialogo.setHeaderText("Instrucciones");
