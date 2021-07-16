@@ -565,7 +565,7 @@ public class main extends Application {
 
         } else if (pc == false) {
             p1.getChildren().clear();
-            lbPc.setText("     La Pc decicio que va a rotar a la derecha.");
+            lbPc.setText("     La Pc decidio que va a rotar a la derecha.");
             lbPc.setStyle("-fx-font: normal bold 12px 'serif' ");
 
             String value = (String) combo.getValue();
