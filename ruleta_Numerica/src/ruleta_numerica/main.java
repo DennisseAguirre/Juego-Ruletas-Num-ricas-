@@ -29,14 +29,7 @@ import javafx.stage.Stage;
 import static clases.anillo.eliminar;
 import static clases.anillo.rotarDerecha;
 import static clases.anillo.rotarIzquierda;
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.control.Alert;
-import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
 import javax.swing.JOptionPane;
 
@@ -58,7 +51,6 @@ public class main extends Application {
     public static Button eliminar = new Button("Eliminar");
     public static Button comodin = new Button("Comodin");
     public static Button salir = new Button("Salir");
-    public static Button reiniciar = new Button("Reiniciar");
     public static PanelCircular circulo2 = new PanelCircular();
     public static int total;
     public static int numCircul;
@@ -158,7 +150,7 @@ public class main extends Application {
         panel_mover.setSpacing(10);
         
         list3.addAll(principal);
-        list2.addAll(panel3,panel4,panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2,p4, p3, reiniciar, salir);
+        list2.addAll(panel3,panel4,panel2, play, ayuda, operacion, p1, combo, izquierda, derecha,p2,p4, p3, salir);
         
         panel_mover.getChildren().addAll(combo,izquierda,derecha);
         // Agregando elementos al panel principal
@@ -231,21 +223,6 @@ public class main extends Application {
 
     // Metodo que tendra las acciones que haran ciertos botones
     public static void botones(Button play, CircularDoublyLinkedList c1, CircularDoublyLinkedList c2, TextField t1, TextField t2, TextField t3, CircularDoublyLinkedList<CircularDoublyLinkedList<Integer>> ctodas) {
-        reiniciar.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
-        reiniciar.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                JOptionPane.showMessageDialog(null, "Volvamos a empezar");
-                try {
-                    restartApplication();
-                } catch (URISyntaxException ex) {
-                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
         salir.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;");
         salir.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -496,22 +473,6 @@ public class main extends Application {
                 }
             }
         });
-    }
-
-    // Metodo que reinicia la aplicacion
-    public static void restartApplication() throws URISyntaxException, IOException {
-        final String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-        final File currentJar = new File(main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-        if (!currentJar.getName().endsWith(".jar")) {
-            return;
-        }
-        final ArrayList<String> command = new ArrayList<String>();
-        command.add(javaBin);
-        command.add("-jar");
-        command.add(currentJar.getPath());
-        final ProcessBuilder builder = new ProcessBuilder(command);
-        builder.start();
-        System.exit(0);
     }
 
     // Metodo que le dará un comodín al usuario para cambiar la operación de los circulos
