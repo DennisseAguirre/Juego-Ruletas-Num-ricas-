@@ -1,6 +1,9 @@
 
 package clases;
-
+/**
+ *
+ * @author Grupo 6
+ */
 public class anillo {
     // Clase que manejará las operaciones que harán los anillos
     public static CircularDoublyLinkedList<Integer> rotarIzquierda(CircularDoublyLinkedList<Integer> lista1) {

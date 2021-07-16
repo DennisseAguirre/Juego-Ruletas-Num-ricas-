@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ruleta_numerica;
-
+/**
+ *
+ * @author Grupo 6
+ */
 //imports
 import clases.CircularDoublyLinkedList;
 import javafx.application.Application;

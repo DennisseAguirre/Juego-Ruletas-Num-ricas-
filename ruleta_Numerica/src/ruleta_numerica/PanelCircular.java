@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package ruleta_numerica;
-
+/**
+ *
+ * @author Grupo 6
+ */
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;

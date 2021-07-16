@@ -1,5 +1,9 @@
 
 package clases;
+/**
+ *
+ * @author Grupo 6
+ */
 // Los elemento que tendrán un nodo
 public class Node<E>{
     private E content;

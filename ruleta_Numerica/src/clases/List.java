@@ -1,5 +1,9 @@
 
 package clases;
+/**
+ *
+ * @author Grupo 6
+ */
 // interface que establece los metodos que tendra una lista
 public interface List <E>{
     int size();

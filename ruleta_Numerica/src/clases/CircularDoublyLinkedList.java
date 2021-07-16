@@ -1,5 +1,8 @@
 package clases;
-
+/**
+ *
+ * @author Grupo 6
+ */
 import java.util.Iterator;
 // Clase que implementa los métodos de CircularDoublyLinkedList
 public class CircularDoublyLinkedList<E> implements List<E> {
